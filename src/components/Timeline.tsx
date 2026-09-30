@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { ChevronLeft, ChevronRight, RotateCcw, ZoomIn, ZoomOut, GripVertical } from 'lucide-react';
 import { dynasties } from '../data/dynasties';
 import type { Dynasty, Period } from '../domain/types';
@@ -20,6 +20,13 @@ export function Timeline({
 }) {
   const [focused, setFocused] = useState(false);
   const axis = useRef<HTMLDivElement>(null);
+  const [axisWidth, setAxisWidth] = useState(1000);
+  useEffect(() => {
+    if (!axis.current) return;
+    const observer = new ResizeObserver(([entry]) => setAxisWidth(entry.contentRect.width));
+    observer.observe(axis.current);
+    return () => observer.disconnect();
+  }, []);
   const min = focused ? dynasty.start : -221,
     max = focused ? dynasty.end : 1912;
   const percent = (year: number) => Math.max(0, Math.min(100, ((year - min) / (max - min)) * 100));
@@ -34,7 +41,8 @@ export function Timeline({
     laneEnds[lane] = d.end;
     lanes.set(d.id, lane);
   }
-  const laneHeight = 62 / Math.max(3, laneEnds.length);
+  const laneHeight = 24;
+  const bandHeight = laneHeight * Math.max(3, laneEnds.length);
   const contemporary = conflictPeriods.find(
     (p) => p.dynastyIds.includes(dynasty.id) && p.year >= range.start && p.year <= range.end,
   );
@@ -51,7 +59,11 @@ export function Timeline({
     ? Array.from({ length: 7 }, (_, i) => Math.round(min + ((max - min) * i) / 6))
     : [-221, 1, 220, 420, 618, 907, 1127, 1368, 1644, 1912];
   return (
-    <section className="app-timeline" aria-label="历史时间轴">
+    <section
+      className="app-timeline"
+      aria-label="历史时间轴"
+      style={{ '--timeline-band-height': `${bandHeight}px` } as CSSProperties}
+    >
       <div className="timeline-toolbar">
         <div className="timeline-current">
           <button
@@ -143,7 +155,7 @@ export function Timeline({
                   height: laneHeight - 2,
                 }}
               >
-                {percent(d.end) - percent(d.start) > 2 || conflictDynasties.has(d.id)
+                {((percent(d.end) - percent(d.start)) * axisWidth) / 100 >= d.short.length * 12 + 4
                   ? d.short
                   : ''}
               </button>

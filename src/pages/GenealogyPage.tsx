@@ -5,6 +5,7 @@ import {
   ZoomIn,
   ZoomOut,
   LocateFixed,
+  Maximize,
   X,
   ArrowUpRight,
   Search,
@@ -24,6 +25,19 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
   const [active, setActive] = useState<Emperor>();
   const [query, setQuery] = useState('');
   const [view, setView] = useState({ zoom: 1, x: 0, y: 0 });
+  const canvas = useRef<HTMLDivElement>(null);
+  const [canvasSize, setCanvasSize] = useState({ width: 1100, height: 650 });
+  useEffect(() => {
+    if (!canvas.current) return;
+    const observer = new ResizeObserver(([entry]) =>
+      setCanvasSize({
+        width: Math.max(1, entry.contentRect.width),
+        height: Math.max(1, entry.contentRect.height),
+      }),
+    );
+    observer.observe(canvas.current);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     if (dynasties.some((d) => d.id === initialDynasty)) {
       setId(initialDynasty);
@@ -72,14 +86,19 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
     mode === 'succession'
       ? episodes
       : people.map((p) => ({ person: p, period: p.reigns[0], key: p.id, restored: false }));
-  const columns = 5,
-    width = 1100,
-    height = Math.max(580, Math.ceil(nodes.length / columns) * 125 + 90);
+  // Keep one SVG unit per screen pixel at 100%; overview is an explicit action.
+  const nodeWidth = 192,
+    nodeHeight = 84,
+    columnStep = 220,
+    rowStep = 116;
+  const columns = Math.max(1, Math.min(6, Math.floor((canvasSize.width - 20) / columnStep)));
+  const graphWidth = columns * columnStep + 20;
+  const graphHeight = Math.ceil(nodes.length / columns) * rowStep + 20;
   const position = (index: number) => {
     const row = Math.floor(index / columns);
     return {
-      x: 45 + (row % 2 ? columns - 1 - (index % columns) : index % columns) * 210,
-      y: 65 + row * 125,
+      x: 24 + (row % 2 ? columns - 1 - (index % columns) : index % columns) * columnStep,
+      y: 20 + row * rowStep,
     };
   };
   const nameMatches = (p: Emperor) => !query || [p.title, p.name].some((v) => v.includes(query));
@@ -146,6 +165,7 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
           </div>
           <div
             className="genealogy-canvas"
+            ref={canvas}
             onWheel={(e) =>
               setView((v) => ({
                 ...v,
@@ -154,7 +174,7 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
             }
           >
             <svg
-              viewBox={`0 0 ${width} ${height}`}
+              viewBox={`0 0 ${canvasSize.width} ${canvasSize.height}`}
               aria-label={`${dynasty.name}${mode === 'succession' ? '在位更替图' : '父子关系图'}`}
               onPointerDown={(e) => {
                 if ((e.target as Element).closest('[role="button"]')) return;
@@ -163,12 +183,10 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
               }}
               onPointerMove={(e) => {
                 if (!drag.current) return;
-                const rect = e.currentTarget.getBoundingClientRect();
-                const unit = width / rect.width;
                 setView((v) => ({
                   ...v,
-                  x: drag.current!.panX + (e.clientX - drag.current!.x) * unit,
-                  y: drag.current!.panY + (e.clientY - drag.current!.y) * unit,
+                  x: drag.current!.panX + (e.clientX - drag.current!.x),
+                  y: drag.current!.panY + (e.clientY - drag.current!.y),
                 }));
               }}
               onPointerUp={() => {
@@ -194,17 +212,19 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill="url(#graph-dots)" />
-              <g transform={`translate(${view.x} ${view.y}) scale(${view.zoom})`}>
+              <g
+                transform={`translate(${view.x + Math.max(0, (canvasSize.width - graphWidth * view.zoom) / 2)} ${view.y}) scale(${view.zoom})`}
+              >
                 {mode === 'succession'
                   ? nodes.slice(0, -1).map((node, i) => {
                       const a = position(i),
                         b = position(i + 1),
                         same = a.y === b.y,
                         forward = b.x > a.x;
-                      const x1 = same ? (forward ? a.x + 160 : a.x) : a.x + 80,
-                        y1 = same ? a.y + 34 : a.y + 68,
-                        x2 = same ? (forward ? b.x : b.x + 160) : b.x + 80,
-                        y2 = same ? b.y + 34 : b.y;
+                      const x1 = same ? (forward ? a.x + nodeWidth : a.x) : a.x + nodeWidth / 2,
+                        y1 = same ? a.y + nodeHeight / 2 : a.y + nodeHeight,
+                        x2 = same ? (forward ? b.x : b.x + nodeWidth) : b.x + nodeWidth / 2,
+                        y2 = same ? b.y + nodeHeight / 2 : b.y;
                       const overlap = nodes[i + 1].period.start < node.period.end;
                       return (
                         <path
@@ -221,7 +241,7 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
                       return (
                         <path
                           key={link.to}
-                          d={`M${a.x + 80},${a.y + 68} C${a.x + 80},${a.y + 115} ${b.x + 80},${b.y - 35} ${b.x + 80},${b.y}`}
+                          d={`M${a.x + nodeWidth / 2},${a.y + nodeHeight} C${a.x + nodeWidth / 2},${a.y + rowStep} ${b.x + nodeWidth / 2},${b.y - 35} ${b.x + nodeWidth / 2},${b.y}`}
                           className="graph-edge family"
                           markerEnd="url(#graph-arrow)"
                         />
@@ -245,19 +265,24 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
                         }
                       }}
                     >
-                      <rect width="160" height="68" rx="6" />
-                      <rect className="graph-node-accent" width="3" height="38" y="15" rx="1" />
-                      <text className="graph-node-title" x="13" y="24">
-                        {node.person.title.slice(0, 10)}
+                      <rect width={nodeWidth} height={nodeHeight} rx="6" />
+                      <title>{`${node.person.title} · ${node.person.name} · ${periodLabel(node.period)}`}</title>
+                      <rect className="graph-node-accent" width="3" height="50" y="17" rx="1" />
+                      <text className="graph-node-title" x="13" y="26">
+                        {node.person.title.length > 10
+                          ? `${node.person.title.slice(0, 9)}…`
+                          : node.person.title}
                       </text>
-                      <text className="graph-node-name" x="13" y="43">
-                        {node.person.name}
+                      <text className="graph-node-name" x="13" y="49">
+                        {node.person.name.length > 11
+                          ? `${node.person.name.slice(0, 10)}…`
+                          : node.person.name}
                       </text>
-                      <text className="graph-node-dates" x="13" y="59">
+                      <text className="graph-node-dates" x="13" y="70">
                         {periodLabel(node.period)}
                       </text>
                       {node.restored && (
-                        <text className="graph-restored" x="127" y="25">
+                        <text className="graph-restored" x="153" y="70">
                           复位
                         </text>
                       )}
@@ -270,14 +295,14 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
           <div className="graph-bottom">
             <span>
               {mode === 'succession'
-                ? `${episodes.length} 段在位记录 · 交叠区间使用虚线，不表示直接继位`
+                ? `${episodes.length} 段在位记录 · 拖动阅读；虚线表示在位交叠`
                 : `${familyLinks.length} 条有来源的父子关系 · ${people.length} 个人物节点`}
             </span>
             <div>
               <button
                 className="icon-button"
                 aria-label="缩小世系图"
-                onClick={() => setView((v) => ({ ...v, zoom: Math.max(0.4, v.zoom - 0.15) }))}
+                onClick={() => setView((v) => ({ ...v, zoom: Math.max(0.05, v.zoom * 0.85) }))}
               >
                 <ZoomOut size={16} />
               </button>
@@ -295,6 +320,24 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
                 onClick={() => setView({ zoom: 1, x: 0, y: 0 })}
               >
                 <LocateFixed size={16} />
+              </button>
+              <button
+                className="text-button"
+                aria-label="查看世系全图"
+                onClick={() =>
+                  setView({
+                    x: 0,
+                    y: 0,
+                    zoom: Math.min(
+                      1,
+                      (canvasSize.width - 12) / graphWidth,
+                      (canvasSize.height - 12) / graphHeight,
+                    ),
+                  })
+                }
+              >
+                <Maximize size={15} />
+                <span>查看全图</span>
               </button>
             </div>
           </div>

@@ -229,7 +229,7 @@
   border-bottom-color: var(--accent);
 }
 .explorer-category {
-  font-size: 8px;
+  font-size: var(--font-caption);
   flex-shrink: 0;
   padding-right: 4px;
   border-right: 1px solid var(--border);

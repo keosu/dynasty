@@ -2656,3 +2656,267 @@ input[type='checkbox'] {
 .time-handle.end {
   transform: translateX(0);
 }
+
+/* Reading sizes are shared across desktop and mobile; density comes from layout. */
+:root {
+  --font-list: 14px;
+  --font-meta: 12px;
+  --font-caption: 11px;
+}
+.explorer-heading strong,
+.explorer-tabs > button,
+.explorer-row-title strong,
+.explorer-person strong {
+  font-size: var(--font-list);
+}
+.explorer-heading {
+  flex-wrap: wrap;
+}
+.explorer-heading > span,
+.explorer-tabs b,
+.explorer-row-title > span,
+.explorer-event p,
+.explorer-person p,
+.explorer-person small {
+  font-size: var(--font-meta);
+  color: var(--secondary);
+}
+.explorer-search input {
+  font-size: 14px;
+}
+.event-categories button {
+  font-size: 12px;
+}
+.explorer-event,
+.explorer-person {
+  min-height: 76px;
+  padding: 11px 12px;
+}
+.explorer-row-title {
+  align-items: baseline;
+}
+.explorer-row-title strong {
+  white-space: normal;
+  line-height: 1.45;
+}
+.explorer-row-title > span {
+  flex-shrink: 0;
+}
+.explorer-event p {
+  flex-wrap: wrap;
+  line-height: 1.5;
+}
+.explorer-person > div {
+  min-width: 0;
+}
+.explorer-person small {
+  display: inline-block;
+}
+.explorer-footer {
+  font-size: 11px;
+}
+.event-symbol {
+  width: 32px;
+  height: 34px;
+}
+.event-symbol svg {
+  width: 18px;
+  height: 18px;
+}
+.directory-people {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 10px;
+}
+.emperor-card-copy h3 {
+  font-size: 17px;
+}
+.emperor-card-copy h3 > span,
+.emperor-card-copy > .eyebrow {
+  font-size: 12px;
+  color: var(--secondary);
+}
+.emperor-card-copy p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.emperor-seal {
+  width: 40px;
+  height: 48px;
+}
+.emperor-seal small {
+  font-size: 11px;
+}
+.search-input input,
+.page-intro p,
+.event-list-item p,
+.inspector-content p {
+  font-size: 14px;
+}
+.directory-note,
+.event-year,
+.event-year > span,
+.event-location,
+.event-list-item .category {
+  font-size: 12px;
+}
+.event-list-item h2 {
+  font-size: 18px;
+}
+.inspector-content h3 {
+  font-size: 15px;
+}
+.inspector-related,
+.conflict-legend-heading,
+.conflict-legend-row button,
+.conflict-polity-detail p,
+.conflict-polity-detail a {
+  font-size: 13px;
+}
+.conflict-legend-row small,
+.conflict-legend-note {
+  font-size: 11px;
+}
+.conflict-legend {
+  width: 240px;
+}
+.speech-button,
+.sources a,
+.sources p {
+  font-size: 12px;
+}
+.graph-node-title {
+  font-size: 16px;
+}
+.graph-node-name {
+  font-size: 13px;
+}
+.graph-node-dates,
+.graph-restored {
+  font-size: 12px;
+}
+.graph-node-dates {
+  fill: var(--secondary);
+}
+.graph-caption p,
+.graph-search input,
+.graph-bottom,
+.graph-bottom > span,
+.graph-bottom > div,
+.claimant-strip,
+.claimant-strip button {
+  font-size: 12px;
+}
+.graph-bottom {
+  min-height: 48px;
+  height: auto;
+  padding-block: 6px;
+}
+.graph-bottom .text-button {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.claimant-strip {
+  max-height: 80px;
+  overflow: auto;
+}
+.app-timeline {
+  height: calc(var(--timeline-band-height) + 100px);
+  flex-basis: calc(var(--timeline-band-height) + 100px);
+}
+.timeline-toolbar {
+  height: 44px;
+}
+.chronology-axis {
+  height: calc(var(--timeline-band-height) + 26px);
+}
+.chronology-bands {
+  height: var(--timeline-band-height);
+  background: var(--surface-2);
+}
+.chronology-era {
+  font-size: 12px;
+  line-height: 20px;
+}
+.range-selection {
+  height: var(--timeline-band-height);
+}
+.time-handle {
+  height: calc(var(--timeline-band-height) + 6px);
+}
+.chronology-ticks {
+  top: calc(var(--timeline-band-height) + 6px);
+}
+.chronology-ticks > span,
+.time-handle span,
+.timeline-footnote {
+  font-size: 11px;
+}
+.timeline-current strong {
+  font-size: 14px;
+}
+.timeline-current .range-title,
+.timeline-actions label,
+.timeline-actions input {
+  font-size: 12px;
+}
+@media (min-width: 851px) {
+  .explorer-panel {
+    width: 320px;
+    min-width: 285px;
+  }
+  .inspector-panel {
+    width: 360px;
+    min-width: 310px;
+  }
+}
+@media (max-width: 850px) {
+  .explorer-panel {
+    width: 310px;
+    max-width: calc(100% - 40px);
+  }
+  .map-workspace.with-sidebar .map-reference {
+    display: none;
+  }
+  .conflict-legend {
+    width: 225px;
+  }
+  .graph-caption {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .graph-caption > div {
+    min-width: 0;
+  }
+  .graph-caption p {
+    font-size: 12px;
+  }
+  .graph-bottom {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .graph-bottom > div {
+    margin-left: auto;
+  }
+  .app-timeline {
+    height: calc(var(--timeline-band-height) + 88px);
+    flex-basis: calc(var(--timeline-band-height) + 88px);
+  }
+  .timeline-toolbar {
+    height: 40px;
+  }
+  .timeline-current strong {
+    font-size: 12px;
+  }
+  .timeline-current .range-title {
+    font-size: 11px;
+  }
+  .timeline-footnote {
+    font-size: 10px;
+  }
+  .timeline-actions .text-button {
+    font-size: 12px;
+  }
+  .timeline-actions .text-button > span {
+    max-width: none;
+  }
+}

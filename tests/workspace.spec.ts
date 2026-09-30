@@ -131,6 +131,12 @@ test('世系覆盖晚唐、复位节点与血缘视图，点击打开档案', as
   await page.goto('/#/genealogy/tang');
   await expect(page.locator('.graph-node').filter({ hasText: '唐昭宗' })).toHaveCount(2);
   await expect(page.locator('.graph-node')).toHaveCount(26);
+  // A large genealogy must not shrink its text automatically to fit the screen.
+  await expect
+    .poll(async () =>
+      Math.abs((await page.locator('.graph-node').first().boundingBox())!.width - 192),
+    )
+    .toBeLessThan(2);
   await page.locator('.graph-node').filter({ hasText: '唐哀帝' }).click();
   await expect(page.locator('.inspector-panel h2')).toContainText('唐哀帝');
   await page.getByRole('button', { name: '关闭世系人物' }).click();
@@ -172,6 +178,21 @@ test('手机布局固定在视口内，面板可打开和关闭', async ({ page 
           document.documentElement.scrollHeight <= innerHeight,
       ),
     ).toBe(true);
+    if (path.includes('genealogy')) {
+      const firstNode = page.locator('.graph-node').first();
+      await expect
+        .poll(async () => Math.abs((await firstNode.boundingBox())!.width - 192))
+        .toBeLessThan(2);
+      await page.getByRole('button', { name: '查看世系全图' }).click();
+      await expect.poll(async () => (await firstNode.boundingBox())!.width).toBeLessThan(192);
+      const canvas = (await page.locator('.genealogy-canvas').boundingBox())!;
+      const last = (await page.locator('.graph-node').last().boundingBox())!;
+      expect(last.y + last.height).toBeLessThanOrEqual(canvas.y + canvas.height);
+      await page.getByRole('button', { name: '重置世系图' }).click();
+      await expect
+        .poll(async () => Math.abs((await firstNode.boundingBox())!.width - 192))
+        .toBeLessThan(2);
+    }
   }
   await page.getByRole('button', { name: '切换导航' }).click();
   await page.getByRole('navigation').getByRole('link', { name: '历史地图' }).click();
