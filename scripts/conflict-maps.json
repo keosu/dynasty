@@ -1,0 +1,412 @@
+{
+  "scenes": [
+    {
+      "id": "three-kingdoms-262",
+      "name": "三国鼎立",
+      "year": 262,
+      "book": "senior",
+      "pdfPage": 35,
+      "printedPage": 28,
+      "mapTitle": "三国鼎立形势图（262年）",
+      "coverageNote": "展示262年魏、蜀汉、吴及其政权部族界。仅配准教材主图，周边部族留白，不将其解释为无人居住；南海附图未配准。",
+      "controls": [
+        {
+          "name": "洛阳",
+          "pixel": [765, 1263],
+          "coordinates": [112.45, 34.62]
+        },
+        {
+          "name": "成都",
+          "pixel": [674, 1317],
+          "coordinates": [104.07, 30.67]
+        },
+        {
+          "name": "建业",
+          "pixel": [835, 1287],
+          "coordinates": [118.8, 32.06]
+        },
+        {
+          "name": "荆州",
+          "pixel": [761, 1307],
+          "coordinates": [112.24, 30.33]
+        },
+        {
+          "name": "官渡",
+          "pixel": [780, 1255],
+          "coordinates": [114, 34.73]
+        },
+        {
+          "name": "海南东北端",
+          "pixel": [749, 1449],
+          "coordinates": [110.6, 20.1]
+        },
+        {
+          "name": "海南南端",
+          "pixel": [734, 1472],
+          "coordinates": [109.5, 18.2]
+        },
+        {
+          "name": "台湾北端",
+          "pixel": [881, 1365],
+          "coordinates": [121.55, 25.28]
+        },
+        {
+          "name": "台湾南端",
+          "pixel": [872, 1412],
+          "coordinates": [120.85, 21.9]
+        },
+        {
+          "name": "贝加尔湖西南端",
+          "pixel": [670, 1036],
+          "coordinates": [103.7, 51.7]
+        },
+        {
+          "name": "贝加尔湖北端",
+          "pixel": [715, 984],
+          "coordinates": [109.8, 55.75]
+        }
+      ],
+      "polities": [
+        {
+          "id": "wei",
+          "name": "魏",
+          "dynastyId": "wei",
+          "pathIds": [39],
+          "color": "#427cda",
+          "label": [115, 36],
+          "capital": "洛阳",
+          "capitalCoordinates": [112.45, 34.62],
+          "note": "曹魏；参考年为262年，尚未发生263年灭蜀。"
+        },
+        {
+          "id": "shu",
+          "name": "蜀汉",
+          "dynastyId": "shu",
+          "pathIds": [40],
+          "color": "#298768",
+          "label": [103.6, 27.6],
+          "capital": "成都",
+          "capitalCoordinates": [104.07, 30.67],
+          "note": "刘备建立的汉政权，史称蜀汉；263年灭亡。"
+        },
+        {
+          "id": "wu",
+          "name": "吴",
+          "dynastyId": "wu",
+          "pathIds": [41, 42, 74, 108],
+          "color": "#c27a29",
+          "label": [115, 26.6],
+          "capital": "建业",
+          "capitalCoordinates": [118.8, 32.06],
+          "note": "孙吴，定都建业；本图不是赤壁之战时的势力范围。"
+        }
+      ]
+    },
+    {
+      "id": "northern-southern-572",
+      "name": "南北朝后期",
+      "year": 572,
+      "book": "senior",
+      "pdfPage": 39,
+      "printedPage": 32,
+      "mapTitle": "北齐、北周、陈对峙形势图（572年）",
+      "coverageNote": "展示南北朝后期572年的北周、北齐、陈及后梁（西梁）。不回套到北魏、刘宋或东魏、西魏时期；按原图主图提取，海南仅有图框内的北部轮廓。 本图为高度概化的小幅教学示意，配准最大控制点残差约19像素（2倍渲染），高于其他场景，不用于精确地理定位。",
+      "controls": [
+        {
+          "name": "长安",
+          "pixel": [806, 1250],
+          "coordinates": [108.94, 34.26]
+        },
+        {
+          "name": "邺",
+          "pixel": [877, 1206],
+          "coordinates": [114.62, 36.34]
+        },
+        {
+          "name": "建康",
+          "pixel": [942, 1278],
+          "coordinates": [118.8, 32.06]
+        },
+        {
+          "name": "台湾北端",
+          "pixel": [1000, 1373],
+          "coordinates": [121.55, 25.28]
+        },
+        {
+          "name": "台湾南端",
+          "pixel": [993, 1427],
+          "coordinates": [120.85, 21.9]
+        },
+        {
+          "name": "长江口",
+          "pixel": [982, 1300],
+          "coordinates": [121.9, 31.7]
+        },
+        {
+          "name": "雷州半岛南端",
+          "pixel": [851, 1473],
+          "coordinates": [110.15, 20.25]
+        },
+        {
+          "name": "珠江口",
+          "pixel": [912, 1450],
+          "coordinates": [113.55, 22.2]
+        }
+      ],
+      "polities": [
+        {
+          "id": "northern-zhou",
+          "name": "北周",
+          "dynastyId": "polity-5a0894b8c4",
+          "pathIds": [13],
+          "color": "#427cda",
+          "label": [105, 35],
+          "capital": "长安",
+          "capitalCoordinates": [108.94, 34.26],
+          "note": "西魏之后的北朝政权；577年灭北齐。"
+        },
+        {
+          "id": "northern-qi",
+          "name": "北齐",
+          "dynastyId": "polity-828fee8fce",
+          "pathIds": [10],
+          "color": "#8c64c2",
+          "label": [117, 38.3],
+          "capital": "邺",
+          "capitalCoordinates": [114.62, 36.34],
+          "note": "东魏之后的北朝政权，与北周分据东西。"
+        },
+        {
+          "id": "chen",
+          "name": "陈",
+          "dynastyId": "polity-eaa3a53aba",
+          "pathIds": [9, 20],
+          "color": "#298768",
+          "label": [115.5, 26.7],
+          "capital": "建康",
+          "capitalCoordinates": [118.8, 32.06],
+          "note": "南朝陈；589年为隋所灭。"
+        },
+        {
+          "id": "western-liang",
+          "name": "后梁（西梁）",
+          "dynastyId": "polity-4d290326f6",
+          "pathIds": [12],
+          "color": "#c27a29",
+          "label": [111.83, 30.81],
+          "capital": "江陵",
+          "capitalCoordinates": [112.24, 30.33],
+          "note": "江陵一带的西梁，依附北周；与五代后梁不是同一政权。"
+        }
+      ],
+      "calibrationLimits": {
+        "maxPixels": 20,
+        "leaveOneOutMaxPixels": 32
+      }
+    },
+    {
+      "id": "song-liao-xia-1111",
+      "name": "北宋·辽·西夏",
+      "year": 1111,
+      "book": "senior",
+      "pdfPage": 61,
+      "printedPage": 54,
+      "mapTitle": "辽、北宋、西夏形势图（1111年）",
+      "coverageNote": "仅表示1111年北宋、辽、西夏并立。此时金尚未建国；辽东部色块按原教材部族界口径保留，不等同直接州县统治。大理及周边部族尚未提取；南海附图未配准。",
+      "controls": [
+        {
+          "name": "东京",
+          "pixel": [805, 562],
+          "coordinates": [114.31, 34.8]
+        },
+        {
+          "name": "澶州",
+          "pixel": [814, 544],
+          "coordinates": [115.03, 35.77]
+        },
+        {
+          "name": "中京",
+          "pixel": [841, 453],
+          "coordinates": [119.4, 41.6]
+        },
+        {
+          "name": "上京",
+          "pixel": [840, 422],
+          "coordinates": [119.38, 43.96]
+        },
+        {
+          "name": "兴庆",
+          "pixel": [708, 508],
+          "coordinates": [106.23, 38.49]
+        },
+        {
+          "name": "贝加尔湖西南端",
+          "pixel": [686, 331],
+          "coordinates": [103.7, 51.7]
+        },
+        {
+          "name": "贝加尔湖北端",
+          "pixel": [733, 276],
+          "coordinates": [109.8, 55.75]
+        },
+        {
+          "name": "台湾北端",
+          "pixel": [913, 674],
+          "coordinates": [121.55, 25.28]
+        },
+        {
+          "name": "台湾南端",
+          "pixel": [905, 719],
+          "coordinates": [120.85, 21.9]
+        },
+        {
+          "name": "海南东北端",
+          "pixel": [782, 763],
+          "coordinates": [110.6, 20.1]
+        },
+        {
+          "name": "海南南端",
+          "pixel": [762, 786],
+          "coordinates": [109.5, 18.2]
+        }
+      ],
+      "polities": [
+        {
+          "id": "northern-song",
+          "name": "北宋",
+          "dynastyId": "northern-song",
+          "pathIds": [36, 37, 42, 43, 64, 85],
+          "color": "#427cda",
+          "label": [114, 28],
+          "capital": "东京（开封）",
+          "capitalCoordinates": [114.31, 34.8],
+          "note": "与辽订立澶渊之盟，与西夏维持议和后的格局。"
+        },
+        {
+          "id": "liao",
+          "name": "辽",
+          "dynastyId": "polity-ad181593b1",
+          "pathIds": [46, 47, 73, 75],
+          "color": "#c27a29",
+          "label": [116, 46],
+          "capital": "上京临潢府",
+          "capitalCoordinates": [119.38, 43.96],
+          "note": "契丹建立的政权；本图保留教材的东部部族范围口径。"
+        },
+        {
+          "id": "western-xia",
+          "name": "西夏",
+          "dynastyId": "polity-5b5d254bcd",
+          "pathIds": [45],
+          "color": "#8c64c2",
+          "label": [101, 40],
+          "capital": "兴庆府",
+          "capitalCoordinates": [106.23, 38.49],
+          "note": "党项建立的政权；与北宋、辽并立。"
+        }
+      ]
+    },
+    {
+      "id": "song-jin-xia-1142",
+      "name": "南宋·金·西夏",
+      "year": 1142,
+      "book": "senior",
+      "pdfPage": 63,
+      "printedPage": 56,
+      "mapTitle": "金、南宋、西夏形势图（1142年）",
+      "coverageNote": "绍兴和议后的1142年格局。金已灭辽和北宋，不能与1111年辽宋图层叠加。大理、西辽和周边部族未在本场景着色；南海附图未配准。",
+      "controls": [
+        {
+          "name": "上京会宁",
+          "pixel": [923, 898],
+          "coordinates": [126.98, 45.55]
+        },
+        {
+          "name": "燕京",
+          "pixel": [843, 984],
+          "coordinates": [116.4, 39.9]
+        },
+        {
+          "name": "兴庆",
+          "pixel": [743, 1009],
+          "coordinates": [106.23, 38.49]
+        },
+        {
+          "name": "开封",
+          "pixel": [830, 1050],
+          "coordinates": [114.31, 34.8]
+        },
+        {
+          "name": "临安",
+          "pixel": [895, 1099],
+          "coordinates": [120.15, 30.27]
+        },
+        {
+          "name": "台湾北端",
+          "pixel": [927, 1158],
+          "coordinates": [121.55, 25.28]
+        },
+        {
+          "name": "台湾南端",
+          "pixel": [921, 1198],
+          "coordinates": [120.85, 21.9]
+        },
+        {
+          "name": "海南东北端",
+          "pixel": [811, 1237],
+          "coordinates": [110.6, 20.1]
+        },
+        {
+          "name": "海南南端",
+          "pixel": [794, 1260],
+          "coordinates": [109.5, 18.2]
+        },
+        {
+          "name": "贝加尔湖西南端",
+          "pixel": [722, 848],
+          "coordinates": [103.7, 51.7]
+        },
+        {
+          "name": "贝加尔湖北端",
+          "pixel": [764, 799],
+          "coordinates": [109.8, 55.75]
+        }
+      ],
+      "polities": [
+        {
+          "id": "southern-song",
+          "name": "南宋",
+          "dynastyId": "southern-song",
+          "pathIds": [99, 64, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 79],
+          "color": "#427cda",
+          "label": [114.5, 27],
+          "capital": "临安",
+          "capitalCoordinates": [120.15, 30.27],
+          "note": "绍兴和议后与金以淮水—大散关一线为界。"
+        },
+        {
+          "id": "jin",
+          "name": "金",
+          "dynastyId": "polity-b59df8c44a",
+          "pathIds": [98, 65, 93, 94, 101],
+          "color": "#c27a29",
+          "label": [123.87, 44.09],
+          "capital": "上京会宁府",
+          "capitalCoordinates": [126.98, 45.55],
+          "note": "女真建立的政权；1142年仍以上京为都，尚未迁都燕京。"
+        },
+        {
+          "id": "western-xia",
+          "name": "西夏",
+          "dynastyId": "polity-5b5d254bcd",
+          "pathIds": [62],
+          "color": "#8c64c2",
+          "label": [102, 40],
+          "capital": "兴庆府",
+          "capitalCoordinates": [106.23, 38.49],
+          "note": "与南宋、金并立的西北政权。"
+        }
+      ]
+    }
+  ]
+}

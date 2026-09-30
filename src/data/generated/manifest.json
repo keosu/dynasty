@@ -1,0 +1,468 @@
+{
+  "source": "https://zh.wikipedia.org/wiki/中国君主列表",
+  "retrievedAt": "2026-09-22T15:41:31.260470+00:00",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "changes": "繁简转换、字段提取、删去脚注标记、段落截取；原始年份保留于 reignText。",
+  "scope": "中国君主列表的秦至清主表，含表中并立政权、前身及延续政权；不含传说、先秦诸侯、中华帝国与其他地方政权。",
+  "count": 392,
+  "articleSuccess": 392,
+  "groups": [
+    {
+      "id": "qin",
+      "name": "秦",
+      "start": -221,
+      "end": -206,
+      "count": 3
+    },
+    {
+      "id": "western-han",
+      "name": "西汉",
+      "start": -206,
+      "end": 8,
+      "count": 15
+    },
+    {
+      "id": "polity-7b8a6bebd3",
+      "name": "新",
+      "start": 9,
+      "end": 23,
+      "count": 1
+    },
+    {
+      "id": "polity-2afb278e24",
+      "name": "玄汉",
+      "start": 23,
+      "end": 25,
+      "count": 1
+    },
+    {
+      "id": "polity-2781aad9ac",
+      "name": "赤眉汉",
+      "start": 25,
+      "end": 27,
+      "count": 1
+    },
+    {
+      "id": "eastern-han",
+      "name": "东汉",
+      "start": 25,
+      "end": 220,
+      "count": 14
+    },
+    {
+      "id": "wei",
+      "name": "魏",
+      "start": 220,
+      "end": 266,
+      "count": 5
+    },
+    {
+      "id": "shu",
+      "name": "蜀汉",
+      "start": 221,
+      "end": 263,
+      "count": 2
+    },
+    {
+      "id": "wu",
+      "name": "吴",
+      "start": 222,
+      "end": 280,
+      "count": 4
+    },
+    {
+      "id": "western-jin",
+      "name": "西晋",
+      "start": 265,
+      "end": 316,
+      "count": 5
+    },
+    {
+      "id": "eastern-jin",
+      "name": "东晋",
+      "start": 317,
+      "end": 420,
+      "count": 11
+    },
+    {
+      "id": "polity-edecfdf787",
+      "name": "成汉",
+      "start": 304,
+      "end": 347,
+      "count": 5
+    },
+    {
+      "id": "polity-7518cc5249",
+      "name": "汉赵",
+      "start": 304,
+      "end": 329,
+      "count": 7
+    },
+    {
+      "id": "polity-fc977ab8c4",
+      "name": "后赵",
+      "start": 319,
+      "end": 351,
+      "count": 7
+    },
+    {
+      "id": "polity-78351398de",
+      "name": "前凉",
+      "start": 301,
+      "end": 376,
+      "count": 9
+    },
+    {
+      "id": "polity-0478335bad",
+      "name": "前燕",
+      "start": 337,
+      "end": 370,
+      "count": 3
+    },
+    {
+      "id": "polity-047ff422ea",
+      "name": "前秦",
+      "start": 350,
+      "end": 394,
+      "count": 7
+    },
+    {
+      "id": "polity-b4ebb2c4c5",
+      "name": "后燕",
+      "start": 384,
+      "end": 407,
+      "count": 7
+    },
+    {
+      "id": "polity-f5189589be",
+      "name": "北燕",
+      "start": 407,
+      "end": 436,
+      "count": 3
+    },
+    {
+      "id": "polity-6889c12b9c",
+      "name": "南燕",
+      "start": 398,
+      "end": 410,
+      "count": 2
+    },
+    {
+      "id": "polity-daf794a1d3",
+      "name": "后秦",
+      "start": 384,
+      "end": 417,
+      "count": 3
+    },
+    {
+      "id": "polity-e27b3f1395",
+      "name": "西秦",
+      "start": 385,
+      "end": 431,
+      "count": 4
+    },
+    {
+      "id": "polity-ce0a21de85",
+      "name": "夏",
+      "start": 407,
+      "end": 431,
+      "count": 3
+    },
+    {
+      "id": "polity-f6e2401294",
+      "name": "后凉",
+      "start": 386,
+      "end": 403,
+      "count": 4
+    },
+    {
+      "id": "polity-09f1ff7793",
+      "name": "西凉",
+      "start": 400,
+      "end": 421,
+      "count": 3
+    },
+    {
+      "id": "polity-fac9f44691",
+      "name": "南凉",
+      "start": 397,
+      "end": 404,
+      "count": 3
+    },
+    {
+      "id": "polity-ebd44fabca",
+      "name": "北凉",
+      "start": 397,
+      "end": 460,
+      "count": 5
+    },
+    {
+      "id": "polity-843e143e98",
+      "name": "刘宋",
+      "start": 420,
+      "end": 479,
+      "count": 9
+    },
+    {
+      "id": "polity-8ad0e62f8d",
+      "name": "南齐",
+      "start": 479,
+      "end": 502,
+      "count": 7
+    },
+    {
+      "id": "polity-4d290326f6",
+      "name": "梁朝",
+      "start": 502,
+      "end": 587,
+      "count": 11
+    },
+    {
+      "id": "polity-eaa3a53aba",
+      "name": "陈朝",
+      "start": 557,
+      "end": 589,
+      "count": 5
+    },
+    {
+      "id": "northern-wei",
+      "name": "北魏",
+      "start": 386,
+      "end": 534,
+      "count": 16
+    },
+    {
+      "id": "polity-4d7feee5ce",
+      "name": "东魏",
+      "start": 534,
+      "end": 550,
+      "count": 1
+    },
+    {
+      "id": "polity-f40a005c33",
+      "name": "西魏",
+      "start": 508,
+      "end": 556,
+      "count": 4
+    },
+    {
+      "id": "polity-828fee8fce",
+      "name": "北齐",
+      "start": 550,
+      "end": 577,
+      "count": 8
+    },
+    {
+      "id": "polity-5a0894b8c4",
+      "name": "北周",
+      "start": 557,
+      "end": 581,
+      "count": 5
+    },
+    {
+      "id": "sui",
+      "name": "隋",
+      "start": 581,
+      "end": 619,
+      "count": 4
+    },
+    {
+      "id": "tang",
+      "name": "唐",
+      "start": 618,
+      "end": 907,
+      "count": 26
+    },
+    {
+      "id": "polity-ec9b4d36e2",
+      "name": "后梁",
+      "start": 907,
+      "end": 923,
+      "count": 3
+    },
+    {
+      "id": "polity-dde89a2fdc",
+      "name": "后唐",
+      "start": 923,
+      "end": 936,
+      "count": 4
+    },
+    {
+      "id": "polity-5e37970372",
+      "name": "后晋",
+      "start": 936,
+      "end": 946,
+      "count": 2
+    },
+    {
+      "id": "polity-261a8470f3",
+      "name": "后汉",
+      "start": 947,
+      "end": 950,
+      "count": 2
+    },
+    {
+      "id": "polity-c687550824",
+      "name": "北汉",
+      "start": 951,
+      "end": 979,
+      "count": 4
+    },
+    {
+      "id": "polity-827ea57f2b",
+      "name": "后周",
+      "start": 951,
+      "end": 960,
+      "count": 3
+    },
+    {
+      "id": "polity-8d0a93610e",
+      "name": "杨吴",
+      "start": 902,
+      "end": 937,
+      "count": 4
+    },
+    {
+      "id": "polity-b186fb5a14",
+      "name": "前蜀",
+      "start": 903,
+      "end": 925,
+      "count": 2
+    },
+    {
+      "id": "polity-f5c5cc5105",
+      "name": "吴越",
+      "start": 907,
+      "end": 978,
+      "count": 5
+    },
+    {
+      "id": "polity-3705a68030",
+      "name": "楚",
+      "start": 907,
+      "end": 951,
+      "count": 6
+    },
+    {
+      "id": "polity-6e3a96c5b5",
+      "name": "闽",
+      "start": 909,
+      "end": 945,
+      "count": 7
+    },
+    {
+      "id": "polity-21adf1f6c4",
+      "name": "南汉",
+      "start": 909,
+      "end": 971,
+      "count": 5
+    },
+    {
+      "id": "polity-4d3f6bd155",
+      "name": "南平",
+      "start": 913,
+      "end": 963,
+      "count": 5
+    },
+    {
+      "id": "polity-8398e7d2d0",
+      "name": "后蜀",
+      "start": 934,
+      "end": 965,
+      "count": 2
+    },
+    {
+      "id": "polity-8f8da4bb5e",
+      "name": "南唐",
+      "start": 937,
+      "end": 975,
+      "count": 3
+    },
+    {
+      "id": "polity-ad181593b1",
+      "name": "辽",
+      "start": 907,
+      "end": 1125,
+      "count": 10
+    },
+    {
+      "id": "polity-9e6e3355f0",
+      "name": "西辽",
+      "start": 1124,
+      "end": 1218,
+      "count": 6
+    },
+    {
+      "id": "northern-song",
+      "name": "北宋",
+      "start": 960,
+      "end": 1127,
+      "count": 9
+    },
+    {
+      "id": "southern-song",
+      "name": "南宋",
+      "start": 1127,
+      "end": 1279,
+      "count": 10
+    },
+    {
+      "id": "polity-3e2005a19d",
+      "name": "西夏前身",
+      "start": 990,
+      "end": 1032,
+      "count": 2
+    },
+    {
+      "id": "polity-5b5d254bcd",
+      "name": "西夏",
+      "start": 1032,
+      "end": 1227,
+      "count": 10
+    },
+    {
+      "id": "polity-b59df8c44a",
+      "name": "金",
+      "start": 1115,
+      "end": 1234,
+      "count": 10
+    },
+    {
+      "id": "yuan",
+      "name": "元",
+      "start": 1271,
+      "end": 1370,
+      "count": 11
+    },
+    {
+      "id": "polity-3278b22c9b",
+      "name": "北元",
+      "start": 1370,
+      "end": 1388,
+      "count": 2
+    },
+    {
+      "id": "ming",
+      "name": "明",
+      "start": 1364,
+      "end": 1644,
+      "count": 16
+    },
+    {
+      "id": "polity-c85f6f2939",
+      "name": "南明",
+      "start": 1644,
+      "end": 1662,
+      "count": 4
+    },
+    {
+      "id": "qing",
+      "name": "清朝",
+      "start": 1616,
+      "end": 1917,
+      "count": 12
+    }
+  ],
+  "warnings": []
+}

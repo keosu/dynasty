@@ -1,0 +1,9 @@
+node_modules
+dist
+test-results
+public/data
+package-lock.json
+*.tsbuildinfo
+.venv
+.cache
+src/data/generated

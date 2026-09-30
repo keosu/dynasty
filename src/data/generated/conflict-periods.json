@@ -1,0 +1,43 @@
+[
+  {
+    "id": "three-kingdoms-262",
+    "name": "三国鼎立",
+    "year": 262,
+    "dynastyIds": [
+      "wei",
+      "shu",
+      "wu"
+    ]
+  },
+  {
+    "id": "northern-southern-572",
+    "name": "南北朝后期",
+    "year": 572,
+    "dynastyIds": [
+      "polity-5a0894b8c4",
+      "polity-828fee8fce",
+      "polity-eaa3a53aba",
+      "polity-4d290326f6"
+    ]
+  },
+  {
+    "id": "song-liao-xia-1111",
+    "name": "北宋·辽·西夏",
+    "year": 1111,
+    "dynastyIds": [
+      "northern-song",
+      "polity-ad181593b1",
+      "polity-5b5d254bcd"
+    ]
+  },
+  {
+    "id": "song-jin-xia-1142",
+    "name": "南宋·金·西夏",
+    "year": 1142,
+    "dynastyIds": [
+      "southern-song",
+      "polity-b59df8c44a",
+      "polity-5b5d254bcd"
+    ]
+  }
+]
