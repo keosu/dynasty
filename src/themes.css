@@ -59,10 +59,10 @@
 }
 [data-theme='colorful'] {
   color-scheme: dark;
-  --app-bg: #11141d;
-  --surface: #1b202b;
-  --surface-2: #222736;
-  --surface-3: #2b3341;
+  --app-bg: #141626;
+  --surface: #1d2235;
+  --surface-2: #262b44;
+  --surface-3: #323851;
   --text: #f0eee8;
   --secondary: #b9becd;
   --subtle: #969fb4;
@@ -70,20 +70,26 @@
   --accent: #79deca;
   --accent-soft: #243e40;
   --accent-border: #467c77;
-  --map-sea: #131e2a;
-  --map-land: #293a3e;
-  --map-coast: #516b70;
-  --map-water: #3d6375;
-  --map-boundary: #85e2b9;
-  --map-fill: #53cfaa30;
-  --gold: #f1c47a;
-  --coral: #f69889;
-  --violet: #bca9f1;
-  --jade: #79deca;
+  --map-sea: #121d34;
+  --map-land: #2a354a;
+  --map-coast: #506079;
+  --map-water: #3c617c;
+  --map-boundary: #f6c76e;
+  --map-fill: #d9a44733;
+  --gold: #ffd178;
+  --coral: #ff968d;
+  --violet: #c0a5ff;
+  --jade: #71e4c3;
+  --spectrum-0: #71e4c3;
+  --spectrum-1: #ffd178;
+  --spectrum-2: #ff968d;
+  --spectrum-3: #c0a5ff;
+  --spectrum-4: #78c8ff;
+  --spectrum-5: #f5a2d2;
   --on-accent: #142b2c;
   --shadow: 0 12px 30px #080b1470, 0 2px 6px #080b1440;
-  --panel-wash: linear-gradient(150deg, #292b3c, #1b202b 65%);
-  --header-wash: linear-gradient(105deg, #2b2839, #1a2d32 60%, #262539);
+  --panel-wash: linear-gradient(115deg, #39304e, #223d49 55%, #352e47);
+  --header-wash: linear-gradient(110deg, #40304d, #253f50 40%, #273f3f 65%, #493446);
 }
 
 /* A little material and depth, without changing the compact workspace geometry. */
@@ -183,20 +189,209 @@
 .speech-error {
   color: var(--coral) !important;
 }
-[data-theme='colorful'] .graph-node-accent,
-[data-theme='colorful'] .graph-restored {
-  fill: var(--violet);
+/* Colorful uses color over meaningful areas, not only small accent icons. */
+[data-theme='colorful'] .brand-mark {
+  background: linear-gradient(140deg, #ffe09b, #ff9ab1 50%, #a6b8ff);
+  color: #312443;
 }
-[data-theme='colorful'] .graph-edge.family {
-  stroke: var(--violet);
+[data-theme='colorful'] .site-header {
+  border-bottom-color: #8d78ab66;
+}
+[data-theme='colorful'] .header-inner nav a {
+  color: var(--nav-color);
+  background: color-mix(in srgb, var(--nav-color) 16%, var(--surface));
+  border-color: color-mix(in srgb, var(--nav-color) 30%, transparent);
+}
+[data-theme='colorful'] .header-inner nav a.active,
+[data-theme='colorful'] .header-inner nav a:hover {
+  background: color-mix(in srgb, var(--nav-color) 30%, var(--surface));
+  border-color: var(--nav-color);
+  box-shadow: inset 0 -2px var(--nav-color);
+}
+[data-theme='colorful'] .explorer-panel {
+  background: linear-gradient(160deg, #302a46, #202e41 50%, #23363d);
+}
+[data-theme='colorful'] .explorer-tabs > button:first-child {
+  color: var(--coral);
+  background: #ff968d17;
+}
+[data-theme='colorful'] .explorer-tabs > button:last-child {
+  color: var(--gold);
+  background: #ffd17817;
+}
+[data-theme='colorful'] .explorer-tabs > button.active {
+  box-shadow: inset 0 -2px currentColor;
+  background: #ffffff0f;
+}
+[data-theme='colorful'] [data-category='全部'] {
+  --item-color: var(--spectrum-5);
+}
+[data-theme='colorful'] [data-category='政治'] {
+  --item-color: var(--gold);
+}
+[data-theme='colorful'] [data-category='战争'] {
+  --item-color: var(--coral);
+}
+[data-theme='colorful'] [data-category='交流'] {
+  --item-color: var(--spectrum-4);
+}
+[data-theme='colorful'] [data-category='文化'] {
+  --item-color: var(--violet);
+}
+[data-theme='colorful'] [data-category='建设'] {
+  --item-color: var(--jade);
+}
+[data-theme='colorful'] .event-categories button {
+  color: var(--item-color);
+  background: color-mix(in srgb, var(--item-color) 14%, var(--surface));
+}
+[data-theme='colorful'] .event-categories button.active {
+  background: var(--item-color);
+  color: #182336;
+}
+[data-theme='colorful'] :is(.explorer-event, .explorer-person, .emperor-card, .event-list-item) {
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--item-color) 19%, var(--surface)),
+    color-mix(in srgb, var(--item-color) 7%, var(--surface))
+  );
+  border-left: 3px solid color-mix(in srgb, var(--item-color) 65%, var(--surface));
+  border-bottom-color: color-mix(in srgb, var(--item-color) 24%, var(--surface));
+}
+[data-theme='colorful']
+  :is(.explorer-event, .explorer-person, .emperor-card, .event-list-item):hover,
+[data-theme='colorful'] :is(.explorer-event, .explorer-person).selected {
+  background: color-mix(in srgb, var(--item-color) 26%, var(--surface));
+  border-left-color: var(--item-color);
+}
+[data-theme='colorful'] :is(.event-symbol, .person-monogram, .emperor-seal) {
+  background: var(--item-color);
+  color: #1b2435;
+  box-shadow: 0 3px 10px #080b1433;
+  border-color: transparent;
+}
+[data-theme='colorful'] .emperor-seal :is(span, small) {
+  color: #1b2435;
+}
+[data-theme='colorful'] .event-list-item {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+[data-theme='colorful'] .event-list-item .event-year {
+  color: var(--item-color);
+}
+[data-theme='colorful'] .event-list-item .category {
+  color: var(--item-color);
+  background: color-mix(in srgb, var(--item-color) 18%, var(--surface));
+}
+[data-theme='colorful'] .event-list-item > svg {
+  color: var(--item-color);
+}
+[data-theme='colorful'] .hotspot .hotspot-halo {
+  fill: var(--item-color);
+}
+[data-theme='colorful'] .hotspot .hotspot-core {
+  stroke: var(--item-color);
+}
+[data-theme='colorful'] .hotspot > text {
+  fill: var(--item-color);
+}
+[data-theme='colorful'] .hotspot.selected .hotspot-core {
+  fill: var(--item-color);
+}
+[data-theme='colorful'] .hotspot.selected > text {
+  fill: #1b2435;
+}
+[data-theme='colorful'] .hotspot-label rect {
+  stroke: var(--item-color);
+}
+[data-theme='colorful'] .conflict-shortcuts {
+  background: linear-gradient(100deg, #28263e, #263244);
+}
+[data-theme='colorful'] .conflict-shortcuts button:nth-of-type(1) {
+  --item-color: var(--coral);
+}
+[data-theme='colorful'] .conflict-shortcuts button:nth-of-type(2) {
+  --item-color: var(--violet);
+}
+[data-theme='colorful'] .conflict-shortcuts button:nth-of-type(3) {
+  --item-color: var(--spectrum-4);
+}
+[data-theme='colorful'] .conflict-shortcuts button:nth-of-type(4) {
+  --item-color: var(--gold);
+}
+[data-theme='colorful'] .conflict-shortcuts button {
+  color: var(--item-color);
+  border-color: color-mix(in srgb, var(--item-color) 38%, var(--surface));
+  background: color-mix(in srgb, var(--item-color) 17%, var(--surface));
+}
+[data-theme='colorful'] .conflict-shortcuts button[aria-pressed='true'] {
+  border-color: var(--item-color);
+  background: color-mix(in srgb, var(--item-color) 30%, var(--surface));
+}
+[data-theme='colorful'] .conflict-shortcuts button small {
+  color: var(--secondary);
+}
+[data-theme='colorful'] .app-timeline {
+  background: linear-gradient(115deg, #34304b, #233a49 50%, #3b3045);
+  border-top-color: #8772ae77;
 }
 [data-theme='colorful'] .timeline-current .range-title {
   color: var(--gold);
 }
-[data-theme='colorful'] .conflict-shortcuts button[aria-pressed='true'] {
+[data-theme='colorful'] .chronology-era {
+  background: color-mix(in srgb, var(--item-color) 35%, var(--surface));
+  border-color: color-mix(in srgb, var(--item-color) 45%, var(--surface));
+  color: color-mix(in srgb, var(--item-color) 65%, white);
+}
+[data-theme='colorful'] .chronology-era.active,
+[data-theme='colorful'] .chronology-era:hover {
+  background: var(--item-color);
+  border-color: var(--item-color);
+  color: #182336;
+}
+[data-theme='colorful'] .genealogy-canvas {
+  background:
+    radial-gradient(ellipse at 15% 10%, #49345c66, transparent 60%),
+    radial-gradient(ellipse at 90% 90%, #204f5d66, transparent 60%), #1d2537;
+}
+[data-theme='colorful'] .graph-node > rect:first-child {
+  fill: color-mix(in srgb, var(--item-color) 20%, var(--surface));
+  stroke: color-mix(in srgb, var(--item-color) 60%, var(--surface));
+}
+[data-theme='colorful'] .graph-node.selected > rect:first-child,
+[data-theme='colorful'] .graph-node:hover > rect:first-child,
+[data-theme='colorful'] .graph-node:focus-visible > rect:first-child {
+  fill: color-mix(in srgb, var(--item-color) 35%, var(--surface));
+  stroke: var(--item-color);
+}
+[data-theme='colorful'] :is(.graph-node-accent, .graph-node-title, .graph-restored) {
+  fill: var(--item-color);
+}
+[data-theme='colorful'] .graph-edge {
+  stroke: #79b6d9;
+}
+[data-theme='colorful'] .graph-edge.family {
+  stroke: var(--violet);
+}
+[data-theme='colorful'] .graph-arrow {
+  fill: #79b6d9;
+}
+[data-theme='colorful'] :is(.page-intro, .detail-hero) {
+  background: linear-gradient(115deg, #65416255, #354f6855 50%, #3b645755);
+  border-bottom: 1px solid #a789d366;
+}
+[data-theme='colorful'] .inspector-panel {
+  background: linear-gradient(160deg, #302a46, #1d2939 70%);
+}
+[data-theme='colorful'] .inspector-heading {
+  background: var(--panel-wash);
+}
+[data-theme='colorful'] .inspector-content h3 {
   color: var(--gold);
-  border-color: color-mix(in srgb, var(--gold) 45%, var(--border));
-  background: color-mix(in srgb, var(--gold) 10%, var(--surface));
+}
+[data-theme='colorful'] .inspector-related {
+  border-left: 3px solid var(--violet);
 }
 
 /* Native radios provide arrow-key selection and announce the active theme. */
@@ -338,13 +533,13 @@
   background: #a4b5cd;
 }
 .preview-colorful {
-  background: #1b202b;
+  background: linear-gradient(130deg, #65416b, #286779);
 }
 .preview-colorful i {
   background: #79deca;
 }
 .preview-colorful i:nth-child(2) {
-  background: #f69889;
+  background: #ff968d;
 }
 .preview-colorful i:nth-child(3) {
   background: #f1c47a;

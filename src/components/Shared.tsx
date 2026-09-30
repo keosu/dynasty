@@ -2,6 +2,7 @@ import { ArrowUpRight, BookOpen, ChevronRight } from 'lucide-react';
 import type { Emperor, Source } from '../domain/types';
 import { periodLabel } from '../domain/queries';
 import { dynasties } from '../data/dynasties';
+import { identityColor } from '../theme';
 
 export const go = (path: string) => {
   window.location.hash = path;
@@ -32,6 +33,7 @@ export function EmperorCard({ emperor, compact = false }: { emperor: Emperor; co
   return (
     <button
       className={`emperor-card ${compact ? 'compact' : ''}`}
+      style={identityColor(emperor.id)}
       onClick={() => go(`/emperors/${emperor.id}`)}
     >
       <div

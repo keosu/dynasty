@@ -136,7 +136,12 @@ export function DirectoryPage({
       ) : entries.length ? (
         <div className="event-list">
           {entries.map((event) => (
-            <a className="event-list-item" key={event.id} href={`#/events/${event.id}`}>
+            <a
+              className="event-list-item"
+              data-category={event.category}
+              key={event.id}
+              href={`#/events/${event.id}`}
+            >
               <div className="event-year">
                 {periodLabel(event)}
                 <span>{dynasties.find((d) => d.id === event.dynastyId)!.name}</span>

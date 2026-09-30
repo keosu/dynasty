@@ -23,6 +23,7 @@ import { HistoryMap } from '../components/HistoryMap';
 import { Timeline } from '../components/Timeline';
 import { SpeechButton } from '../components/SpeechButton';
 import { Sources, go } from '../components/Shared';
+import { identityColor } from '../theme';
 
 export function AtlasPage({
   dynasty,
@@ -177,6 +178,7 @@ export function AtlasPage({
                 {['全部', '政治', '战争', '交流', '文化', '建设'].map((c) => (
                   <button
                     key={c}
+                    data-category={c}
                     className={category === c ? 'active' : ''}
                     onClick={() => setCategory(c)}
                   >
@@ -190,6 +192,7 @@ export function AtlasPage({
                 ? filteredEvents.map((e) => (
                     <button
                       key={e.id}
+                      data-category={e.category}
                       className={`explorer-event ${activeEvent?.id === e.id ? 'selected' : ''}`}
                       onClick={() => selectEvent(e)}
                     >
@@ -212,6 +215,7 @@ export function AtlasPage({
                 : people.map((p) => (
                     <button
                       key={p.id}
+                      style={identityColor(p.id)}
                       className={`explorer-person ${person?.id === p.id ? 'selected' : ''}`}
                       onClick={() => {
                         setPerson(p);
