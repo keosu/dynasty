@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { selectTheme } from './theme-picker';
 
 test('三国同图分色、地图点选、图例开关及在位人物', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -52,8 +53,9 @@ test('南北朝及宋辽金两阶段、时间轴标注、图层不跨年混合',
   await expect(page.locator('.polity-capital')).toContainText(['临安', '上京会宁府', '兴庆府']);
   await expect(page.locator('.chronology-era').filter({ hasText: /^辽$/ })).toHaveCount(1);
   await expect(page.locator('.chronology-era').filter({ hasText: /^金$/ })).toHaveCount(1);
-  await page.getByRole('button', { name: '切换暗色主题' }).click();
-  await page.screenshot({ path: 'test-results/song-jin-dark.png' });
+  await selectTheme(page, '琉璃夜色');
+  await page.waitForTimeout(250);
+  await page.screenshot({ path: 'test-results/song-jin-colorful.png' });
   await page.getByRole('spinbutton', { name: '精确起始年' }).fill('1130');
   await page.getByRole('spinbutton', { name: '精确结束年' }).fill('1130');
   await expect(page.locator('.polity-territory')).toHaveCount(0);

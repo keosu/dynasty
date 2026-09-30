@@ -1,16 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Map,
-  Crown,
-  BookOpen,
-  GitBranch,
-  Search,
-  ArrowRight,
-  Menu,
-  X,
-  Sun,
-  Moon,
-} from 'lucide-react';
+import { Map, Crown, BookOpen, GitBranch, Search, ArrowRight, Menu, X } from 'lucide-react';
 import { dynasties } from './data/dynasties';
 import { events } from './data/events';
 import { emperors } from './data/emperors';
@@ -26,6 +15,7 @@ import {
   NotFound,
 } from './pages/EncyclopediaPages';
 import { go } from './components/Shared';
+import { ThemePicker } from './components/ThemePicker';
 
 const nav = [
   { path: 'atlas', label: '历史地图', icon: Map },
@@ -34,13 +24,6 @@ const nav = [
   { path: 'genealogy', label: '世系更替', icon: GitBranch },
 ];
 export default function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
-    localStorage.getItem('shanhe-theme') === 'dark' ? 'dark' : 'light',
-  );
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem('shanhe-theme', theme);
-  }, [theme]);
   const [hash, setHash] = useState(window.location.hash.slice(1) || '/atlas');
   const [dynastyId, setDynastyId] = useState('tang');
   const [range, setRange] = useState<Period>({ start: 618, end: 907 });
@@ -161,14 +144,7 @@ export default function App() {
             ))}
           </nav>
           <div className="header-actions">
-            <button
-              className="theme-toggle icon-button"
-              aria-label={theme === 'light' ? '切换暗色主题' : '切换亮色主题'}
-              title={theme === 'light' ? '暗色主题' : '亮色主题'}
-              onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
-            >
-              {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
-            </button>
+            <ThemePicker />
             <button
               className="header-search"
               aria-label="搜索百科"

@@ -1,48 +1,4 @@
-/* Application design tokens: both themes share exactly the same component structure. */
-:root,
-[data-theme='light'] {
-  color-scheme: light;
-  --app-bg: #eff3f9;
-  --surface: #fff;
-  --surface-2: #f6f8fc;
-  --surface-3: #eaf0fa;
-  --text: #20304a;
-  --secondary: #60718b;
-  --subtle: #8b9ab0;
-  --border: #e0e7f1;
-  --accent: #2869e8;
-  --accent-soft: #eaf1ff;
-  --accent-border: #b7d0ff;
-  --map-sea: #e1eaf5;
-  --map-land: #f4f6f9;
-  --map-coast: #acbfd4;
-  --map-water: #a7c5e3;
-  --map-boundary: #4583e8;
-  --map-fill: #4383ed24;
-  --shadow: 0 6px 24px #253b6120;
-  --serif: Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-}
-[data-theme='dark'] {
-  color-scheme: dark;
-  --app-bg: #0b1220;
-  --surface: #111c2e;
-  --surface-2: #152238;
-  --surface-3: #1a2c46;
-  --text: #dde8f7;
-  --secondary: #9cafca;
-  --subtle: #6c83a3;
-  --border: #26364d;
-  --accent: #6aa6ff;
-  --accent-soft: #1b3256;
-  --accent-border: #315990;
-  --map-sea: #0c1728;
-  --map-land: #1c2c41;
-  --map-coast: #3b516b;
-  --map-water: #375a7a;
-  --map-boundary: #5b9af7;
-  --map-fill: #4c8aff28;
-  --shadow: 0 6px 24px #0005;
-}
+/* Layout and components; palettes live in themes.css. */
 html,
 body,
 #root {
@@ -180,9 +136,6 @@ g[role='button']:focus-visible {
 .icon-button:hover {
   background: var(--accent-soft);
   color: var(--accent);
-}
-.theme-toggle {
-  border: 1px solid var(--border);
 }
 .site-footer {
   display: none;

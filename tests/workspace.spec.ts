@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { selectTheme } from './theme-picker';
 
 test('固定工作区、双端拖柄、跨期筛选与可折叠面板', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -74,15 +75,30 @@ test('精细地图、热点打开侧栏、滚轮与拖动、图层切换', async
   await expect(page.locator('.inspector-panel h2')).toHaveText('贞观之治');
 });
 
-test('暗色与亮色主题持久化，所有路由使用相同主题', async ({ page }) => {
+test('三种主题持久化、键盘选择与跨页面应用', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: '切换暗色主题' }).click();
+  await selectTheme(page, '静夜暗色');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.goto('/#/genealogy/tang');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await page.getByRole('button', { name: '切换亮色主题' }).click();
+  await page.getByRole('button', { name: /^选择主题/ }).click();
+  await page.getByRole('radio', { name: '静夜暗色' }).press('ArrowRight');
+  await expect(page.getByRole('radio', { name: '琉璃夜色' })).toBeChecked();
+  await page.getByRole('radio', { name: '琉璃夜色' }).press('Escape');
+  await expect(page.getByRole('button', { name: /^选择主题/ })).toBeFocused();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'colorful');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'colorful');
+  for (const route of ['/#/emperors', '/#/events', '/#/about', '/']) {
+    await page.goto(route);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'colorful');
+    expect(await page.locator('html').evaluate((el) => getComputedStyle(el).colorScheme)).toBe(
+      'dark',
+    );
+  }
+  await selectTheme(page, '青瓷亮色');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   expect(await page.evaluate(() => localStorage.getItem('shanhe-theme'))).toBe('light');
 });
@@ -132,6 +148,12 @@ test('世系覆盖晚唐、复位节点与血缘视图，点击打开档案', as
 test('手机布局固定在视口内，面板可打开和关闭', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
+  await selectTheme(page, '琉璃夜色');
+  await page.getByRole('button', { name: /^选择主题/ }).click();
+  const picker = (await page.getByRole('group', { name: '外观主题' }).boundingBox())!;
+  expect(picker.x).toBeGreaterThanOrEqual(0);
+  expect(picker.x + picker.width).toBeLessThanOrEqual(390);
+  await page.getByRole('radio', { name: '琉璃夜色' }).press('Escape');
   await expect(page.locator('.explorer-panel')).toHaveCount(0);
   await page.getByRole('button', { name: '展开探索面板' }).click();
   await page.locator('.explorer-event').filter({ hasText: '贞观之治' }).click();
@@ -156,14 +178,22 @@ test('手机布局固定在视口内，面板可打开和关闭', async ({ page 
   await expect(page.locator('.history-map')).toBeVisible();
 });
 
-test('桌面两种主题与世系截图', async ({ page }) => {
+test('桌面三种主题与世系截图', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   await expect(page.locator('.map-territory.sourced')).toBeAttached();
   await page.screenshot({ path: 'test-results/app-light.png' });
-  await page.getByRole('button', { name: '切换暗色主题' }).click();
+  await selectTheme(page, '静夜暗色');
   await page.waitForTimeout(250);
   await page.screenshot({ path: 'test-results/app-dark.png' });
   await page.goto('/#/genealogy/tang');
   await page.screenshot({ path: 'test-results/graph-dark.png' });
+  await selectTheme(page, '琉璃夜色');
+  await page.waitForTimeout(250);
+  await page.screenshot({ path: 'test-results/graph-colorful.png' });
+  await page.goto('/');
+  await expect(page.locator('.map-territory.sourced')).toBeAttached();
+  await page.screenshot({ path: 'test-results/app-colorful.png' });
+  await page.getByRole('button', { name: /^选择主题/ }).click();
+  await page.screenshot({ path: 'test-results/theme-picker.png' });
 });
