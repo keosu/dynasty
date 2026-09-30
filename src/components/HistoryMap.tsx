@@ -399,7 +399,11 @@ export function HistoryMap({
                   key={first.id}
                   transform={`translate(${point[0]},${point[1]}) scale(${1 / view.zoom})`}
                   className={`hotspot ${selected ? 'selected' : ''} ${first.category === '战争' ? 'war' : ''}`}
-                  data-category={first.category}
+                  data-category={
+                    group.every((event) => event.category === first.category)
+                      ? first.category
+                      : '多类'
+                  }
                   role="button"
                   tabIndex={0}
                   aria-label={`${first.location}：${group.map((e) => e.title).join('、')}`}

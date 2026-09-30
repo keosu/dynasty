@@ -12,6 +12,9 @@ import {
   Search,
   ChevronRight,
   BookOpen,
+  Swords,
+  Globe,
+  Landmark,
 } from 'lucide-react';
 import type { Dynasty, HistoricalEvent, Period, Emperor } from '../domain/types';
 import { dynasties } from '../data/dynasties';
@@ -23,7 +26,11 @@ import { HistoryMap } from '../components/HistoryMap';
 import { Timeline } from '../components/Timeline';
 import { SpeechButton } from '../components/SpeechButton';
 import { Sources, go } from '../components/Shared';
-import { identityColor } from '../theme';
+
+function EventCategorySymbol({ category }: { category: HistoricalEvent['category'] }) {
+  const Icon = { 政治: Crown, 战争: Swords, 交流: Globe, 文化: BookOpen, 建设: Landmark }[category];
+  return <Icon size={15} aria-hidden="true" />;
+}
 
 export function AtlasPage({
   dynasty,
@@ -197,7 +204,7 @@ export function AtlasPage({
                       onClick={() => selectEvent(e)}
                     >
                       <div className={`event-symbol ${e.category === '战争' ? 'war' : ''}`}>
-                        <Zap size={15} />
+                        <EventCategorySymbol category={e.category} />
                       </div>
                       <div>
                         <div className="explorer-row-title">
@@ -205,6 +212,7 @@ export function AtlasPage({
                           <span>{yearLabel(e.start)}</span>
                         </div>
                         <p>
+                          <span className="explorer-category">{e.category}</span>
                           <MapPin size={10} />
                           {e.location}
                         </p>
@@ -215,7 +223,6 @@ export function AtlasPage({
                 : people.map((p) => (
                     <button
                       key={p.id}
-                      style={identityColor(p.id)}
                       className={`explorer-person ${person?.id === p.id ? 'selected' : ''}`}
                       onClick={() => {
                         setPerson(p);

@@ -15,7 +15,6 @@ import type { Emperor } from '../domain/types';
 import { periodLabel } from '../domain/queries';
 import { Sources, go } from '../components/Shared';
 import { SpeechButton } from '../components/SpeechButton';
-import { identityColor } from '../theme';
 
 export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
   const [id, setId] = useState(
@@ -233,7 +232,6 @@ export function GenealogyPage({ initialDynasty }: { initialDynasty: string }) {
                   return (
                     <g
                       key={node.key}
-                      style={identityColor(node.person.id)}
                       transform={`translate(${x},${y})`}
                       role="button"
                       tabIndex={0}

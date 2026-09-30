@@ -4,7 +4,6 @@ import { dynasties } from '../data/dynasties';
 import type { Dynasty, Period } from '../domain/types';
 import { periodLabel, yearLabel } from '../domain/queries';
 import conflictPeriods from '../data/generated/conflict-periods.json';
-import { identityColor } from '../theme';
 
 const conflictDynasties = new Set(conflictPeriods.flatMap((s) => s.dynastyIds));
 
@@ -138,7 +137,6 @@ export function Timeline({
                 aria-pressed={d.id === dynasty.id}
                 onClick={() => onDynasty(d.id)}
                 style={{
-                  ...identityColor(d.id),
                   left: `${percent(d.start)}%`,
                   width: `${Math.max(0.4, percent(d.end) - percent(d.start))}%`,
                   top: (lanes.get(d.id) || 0) * laneHeight,

@@ -1,13 +1,3 @@
-import type { CSSProperties } from 'react';
-
-// Stable visual identity across filtering, chronology and person views.
-// These are presentation colors, not historical classifications.
-export function identityColor(id: string): CSSProperties {
-  let hash = 0;
-  for (const character of id) hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
-  return { '--item-color': `var(--spectrum-${hash % 6})` } as CSSProperties;
-}
-
 // IDs remain stable so saved preferences survive theme and palette updates.
 export const themes = [
   { id: 'light', name: '青瓷亮色', description: '瓷白 · 湖蓝 · 温润纸感', chrome: '#f4f5f1' },
@@ -15,7 +5,7 @@ export const themes = [
   {
     id: 'colorful',
     name: '琉璃夜色',
-    description: '六色琉璃 · 彩色卡片与时间轴',
+    description: '墨色底 · 栏目识色 · 事件分类',
     chrome: '#181c26',
   },
 ] as const;
