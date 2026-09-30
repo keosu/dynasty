@@ -1,6 +1,7 @@
 import type { HistoricalEvent } from '../domain/types';
 import { wiki } from './dynasties';
 import { westernRegionEvents } from './westernRegions';
+import { expandedEvents } from './events-expanded';
 type EventRow = [
   string,
   string,
@@ -412,4 +413,5 @@ export const events: HistoricalEvent[] = [
     }),
   ),
   ...westernRegionEvents,
+  ...expandedEvents,
 ];

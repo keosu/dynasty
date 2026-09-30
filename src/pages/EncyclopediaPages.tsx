@@ -14,7 +14,7 @@ import {
 import { dynasties } from '../data/dynasties';
 import { emperors } from '../data/emperors';
 import { events } from '../data/events';
-import { matchesSearch, overlaps, periodLabel } from '../domain/queries';
+import { matchesSearch, overlaps, periodLabel, yearLabel } from '../domain/queries';
 import type { HistoricalEvent } from '../domain/types';
 import { EmperorCard, EmptyState, Sources, go } from '../components/Shared';
 import { SpeechButton } from '../components/SpeechButton';
@@ -42,13 +42,17 @@ export function PageIntro({
 export function DirectoryPage({
   kind,
   params,
+  onLocate,
 }: {
   kind: 'emperors' | 'events';
   params: URLSearchParams;
+  onLocate?: (event: HistoricalEvent) => void;
 }) {
   const [query, setQuery] = useState(params.get('q') || '');
   const [dynastyId, setDynastyId] = useState(params.get('dynasty') || 'all');
   const [rangeEnabled, setRangeEnabled] = useState(params.has('start') && params.has('end'));
+  const [category, setCategory] = useState(params.get('category') || '全部');
+  const [eventOrder, setEventOrder] = useState('asc');
   const range = { start: Number(params.get('start')), end: Number(params.get('end')) };
   const people = emperors.filter(
     (e) =>
@@ -61,12 +65,15 @@ export function DirectoryPage({
         dynasties.find((d) => d.id === e.dynastyId)!.name,
       ),
   );
-  const entries = events.filter(
-    (e) =>
-      (dynastyId === 'all' || e.dynastyId === dynastyId) &&
-      (!rangeEnabled || overlaps(e, range)) &&
-      matchesSearch(query, e.title, e.summary, e.location, e.category),
-  );
+  const entries = events
+    .filter(
+      (e) =>
+        (dynastyId === 'all' || e.dynastyId === dynastyId) &&
+        (category === '全部' || e.category === category) &&
+        (!rangeEnabled || overlaps(e, range)) &&
+        matchesSearch(query, e.title, e.summary, e.location, e.category),
+    )
+    .sort((a, b) => (eventOrder === 'asc' ? 1 : -1) * (a.start - b.start || a.end - b.end));
   return (
     <>
       <PageIntro
@@ -80,7 +87,7 @@ export function DirectoryPage({
             : '循着历史的坐标，回望改变时代的时刻。从一座城出发，理解一段历史。'
         }
       />
-      <div className="directory-toolbar">
+      <div className={`directory-toolbar ${kind === 'events' ? 'event-toolbar' : ''}`}>
         <label className="search-input">
           <Search size={18} />
           <input
@@ -107,9 +114,32 @@ export function DirectoryPage({
             </option>
           ))}
         </select>
+        {kind === 'events' && (
+          <>
+            <select
+              aria-label="事件类别"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {['全部', '政治', '战争', '交流', '文化', '建设'].map((item) => (
+                <option key={item} value={item}>
+                  {item === '全部' ? '全部类别' : item}
+                </option>
+              ))}
+            </select>
+            <select
+              aria-label="事件排序"
+              value={eventOrder}
+              onChange={(e) => setEventOrder(e.target.value)}
+            >
+              <option value="asc">年代从早到晚</option>
+              <option value="desc">年代从晚到早</option>
+            </select>
+          </>
+        )}
         <span className="muted">
           {kind === 'emperors' ? people.length : entries.length}{' '}
-          {kind === 'emperors' ? '位人物' : '件事件'}
+          {kind === 'emperors' ? '位人物' : `件事件 / 共 ${events.length} 件`}
         </span>
       </div>
       {rangeEnabled && (
@@ -121,7 +151,9 @@ export function DirectoryPage({
         </div>
       )}
       <p className="directory-note">
-        已导入公开君主表与人物正文；交接年按年计，支持多段在位与复位。
+        {kind === 'emperors'
+          ? '已导入公开君主表与人物正文；交接年按年计，支持多段在位与复位。'
+          : '按朝代、类别或关键词查找事件。可直接定位地图，地点以概略位置呈现。'}
       </p>
       {kind === 'emperors' ? (
         people.length ? (
@@ -134,29 +166,43 @@ export function DirectoryPage({
           <EmptyState>没有找到匹配的人物，试试姓名、帝号或其他朝代。</EmptyState>
         )
       ) : entries.length ? (
-        <div className="event-list">
+        <div className="event-list event-grid">
           {entries.map((event) => (
-            <a
-              className="event-list-item"
+            <article
+              className="event-list-item event-card"
               data-category={event.category}
               key={event.id}
-              href={`#/events/${event.id}`}
             >
-              <div className="event-year">
-                {periodLabel(event)}
-                <span>{dynasties.find((d) => d.id === event.dynastyId)!.name}</span>
-              </div>
-              <div>
+              <header className="event-card-meta">
+                <span className="event-year">
+                  {event.start === event.end ? `${yearLabel(event.start)} 年` : periodLabel(event)}
+                </span>
                 <span className="category">{event.category}</span>
-                <h2>{event.title}</h2>
-                <p>{event.summary}</p>
+              </header>
+              <span className="event-card-dynasty">
+                {dynasties.find((d) => d.id === event.dynastyId)!.name}
+              </span>
+              <h2>
+                <a href={`#/events/${event.id}`}>{event.title}</a>
+              </h2>
+              <p className="event-card-summary">{event.summary}</p>
+              <footer className="event-card-footer">
                 <span className="event-location">
-                  <MapPin size={13} />
+                  <MapPin size={14} />
                   {event.location}
                 </span>
-              </div>
-              <ArrowUpRight size={21} />
-            </a>
+                {onLocate && (
+                  <button
+                    className="text-button"
+                    onClick={() => onLocate(event)}
+                    aria-label={`在地图查看：${event.title}`}
+                  >
+                    <MapPin size={14} />
+                    地图
+                  </button>
+                )}
+              </footer>
+            </article>
           ))}
         </div>
       ) : (

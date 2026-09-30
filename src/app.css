@@ -2657,6 +2657,109 @@ input[type='checkbox'] {
   transform: translateX(0);
 }
 
+/* Event directory: use the available width for a readable, filterable card grid. */
+.event-toolbar {
+  flex-wrap: wrap;
+}
+.event-toolbar .search-input {
+  flex: 1 1 280px;
+  max-width: 520px;
+}
+.event-toolbar select {
+  font-size: 13px;
+  min-height: 36px;
+}
+.event-toolbar > .muted {
+  margin-left: auto;
+  font-size: 12px;
+}
+.event-list.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr));
+  gap: 12px;
+  border: 0;
+}
+.event-grid .event-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 16px;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.event-grid .event-card:hover {
+  border-color: var(--accent-border);
+}
+.event-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.event-card-meta .event-year {
+  font-size: 13px;
+}
+.event-card-dynasty {
+  font-size: 12px;
+  color: var(--secondary);
+  margin-top: 12px;
+}
+.event-grid .event-card h2 {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 4px 0 9px;
+}
+.event-grid .event-card-summary {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.event-card-footer {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.event-card-footer .event-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 12px;
+}
+.event-card-footer .event-location svg {
+  margin-top: 2px;
+}
+.event-card-footer .text-button {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--accent);
+}
+@media (max-width: 650px) {
+  .event-toolbar .search-input {
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .event-toolbar select {
+    flex: 1;
+    min-width: 100px;
+    max-width: 100%;
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+  .event-toolbar > .muted {
+    flex-basis: 100%;
+  }
+  .event-grid .event-card {
+    padding: 14px;
+  }
+}
+
 /* Reading sizes are shared across desktop and mobile; density comes from layout. */
 :root {
   --font-list: 14px;

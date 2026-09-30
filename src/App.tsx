@@ -102,7 +102,12 @@ export default function App() {
     content = id ? (
       <EventDetail id={id} onLocate={locate} />
     ) : (
-      <DirectoryPage key={hash} kind="events" params={new URLSearchParams(search)} />
+      <DirectoryPage
+        key={hash}
+        kind="events"
+        params={new URLSearchParams(search)}
+        onLocate={locate}
+      />
     );
   else if (page === 'genealogy') content = <GenealogyPage initialDynasty={id || dynastyId} />;
   else if (page === 'about') content = <AboutPage />;

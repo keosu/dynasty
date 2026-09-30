@@ -54,6 +54,26 @@ describe('历史纪年与时间筛选', () => {
 });
 
 describe('种子数据完整性', () => {
+  it('并立政权和五代有可检索事件，跨年活动保留区间', () => {
+    for (const name of ['辽', '西夏', '金', '后周']) {
+      const dynasty = dynasties.find((d) => d.name === name)!;
+      expect(dynasty, name).toBeDefined();
+      expect(eventsInRange(events, dynasty.id, dynasty).length, name).toBeGreaterThan(0);
+    }
+    expect(eventsInRange(events, 'wu', { start: 252, end: 252 }).map((e) => e.id)).toContain(
+      'dongxing',
+    );
+    expect(
+      eventsInRange(events, 'southern-song', { start: 1270, end: 1270 }).map((e) => e.id),
+    ).toContain('xiangyang-siege');
+    const calendar = events.find((e) => e.id === 'western-jin-founding')!;
+    expect(calendar.start).toBe(266);
+    expect(calendar.content).toContain('265');
+    const printing = events.find((e) => e.id === 'movable-type')!;
+    expect(printing.start).toBe(1041);
+    expect(printing.end).toBe(1048);
+    expect(printing.content).toContain('不声称是已证实的发明遗址');
+  });
   it('ID 唯一，来源均存在，纪年有效', () => {
     for (const collection of [dynasties, emperors, events]) {
       expect(new Set(collection.map((item) => item.id)).size).toBe(collection.length);
