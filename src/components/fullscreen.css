@@ -1,0 +1,23 @@
+.fullscreen-control {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.fullscreen-control [aria-pressed='true'] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.fullscreen-error {
+  position: fixed;
+  top: 64px;
+  right: 12px;
+  width: min(240px, calc(100vw - 24px));
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  line-height: 1.5;
+}

@@ -17,6 +17,7 @@ import {
 import { go } from './components/Shared';
 import { ThemePicker } from './components/ThemePicker';
 import { PwaControls } from './components/PwaControls';
+import { FullscreenButton } from './components/FullscreenButton';
 
 const nav = [
   { path: 'atlas', label: '历史地图', icon: Map },
@@ -151,6 +152,7 @@ export default function App() {
           </nav>
           <div className="header-actions">
             <ThemePicker />
+            <FullscreenButton />
             <PwaControls />
             <button
               className="header-search"
