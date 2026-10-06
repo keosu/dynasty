@@ -129,3 +129,5 @@ npm run test:pwa
 同日事件扩充与目录更新验证：最终构建和 21 项单元测试通过；16 项 Playwright 用例全部通过（新增 2 项事件目录用例），覆盖桌面多列占宽、手机单列与筛选控件宽度、字号、类别与年代排序、关键词／时间组合筛选、空状态、详情来源／人物关联及直接地图定位。已检查桌面亮色、琉璃暗色和手机事件截图，修正了手机搜索框挤压朝代选择器的问题。截图在忽略提交的 `test-results/events-*.png`。没有重新抓取全部人物或生成疆域。
 
 2026-10-05 PWA 与部署更新验证：21 项单元测试、16 项原有 Playwright 用例、4 项新增生产 PWA 用例全部通过，`npm run build:pages` 通过。预缓存 22 个资源约 3.58 MiB，不包含 392 份人物正文。PWA 用例验证 `/dynasty/` 下的清单／PNG 图标／worker 作用域、未提前浏览的地图离线可用、已读与未读正文处理、手机安装入口，以及真实新 worker 等待确认、更新刷新和主题／Hash 保留。手机关于页截图已检查；`npm audit` 无已知漏洞。未重新抓取人物或生成地图。本次在独立 Git worktree 完成，原工作目录已有的地图／事件未提交改动保持原样，不属于本次发布。CI 与部署结果见 [GitHub Actions](https://github.com/keosu/dynasty/actions/workflows/pages.yml)。
+
+同日首次发布完成：仓库已改为 Public，Pages Source 为 GitHub Actions，强制 HTTPS。[首次工作流](https://github.com/keosu/dynasty/actions/runs/37412989160) 的 build 与 deploy 均成功，发布代码提交 `baf88cb`。正式网址返回 HTTP 200，Chromium 安装条件检查无错误，worker 控制范围为 `/dynasty/`；线上地图及已读人物正文断网刷新通过，手机连续三次离线刷新和 390px 布局通过，无页面脚本错误。截图存于本地忽略提交的 `test-results/pwa-live-*.png`。此补充仅记录验证结果，提交使用 `[skip ci]`，不重复部署相同产物。
