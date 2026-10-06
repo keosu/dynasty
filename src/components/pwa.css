@@ -1,0 +1,41 @@
+.pwa-connection {
+  display: inline-flex;
+  align-items: center;
+  color: var(--secondary);
+}
+.pwa-notice {
+  position: fixed;
+  z-index: 160;
+  top: 72px;
+  right: max(12px, env(safe-area-inset-right));
+  width: min(360px, calc(100vw - 24px));
+  padding: 14px;
+  border: 1px solid var(--accent-border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+.pwa-notice strong {
+  font-size: 15px;
+}
+.pwa-notice p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--secondary);
+}
+.pwa-notice-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+.pwa-update {
+  padding: 8px 12px;
+  border-radius: 7px;
+  color: var(--on-accent);
+  background: var(--accent);
+  font-size: 14px;
+}

@@ -16,6 +16,7 @@ import {
 } from './pages/EncyclopediaPages';
 import { go } from './components/Shared';
 import { ThemePicker } from './components/ThemePicker';
+import { PwaControls } from './components/PwaControls';
 
 const nav = [
   { path: 'atlas', label: '历史地图', icon: Map },
@@ -150,6 +151,7 @@ export default function App() {
           </nav>
           <div className="header-actions">
             <ThemePicker />
+            <PwaControls />
             <button
               className="header-search"
               aria-label="搜索百科"

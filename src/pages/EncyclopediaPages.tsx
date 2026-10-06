@@ -10,6 +10,7 @@ import {
   CalendarDays,
   GitBranch,
   ExternalLink,
+  Download,
 } from 'lucide-react';
 import { dynasties } from '../data/dynasties';
 import { emperors } from '../data/emperors';
@@ -398,6 +399,19 @@ export function AboutPage() {
         description="山河纪是一个以地图与时间为线索的中国历史百科原型。每一个入口，都指向可以继续阅读与核对的资料。"
       />
       <div className="about-grid">
+        <section className="panel about-card">
+          <Download />
+          <h2>安装与离线使用</h2>
+          <p>
+            在支持安装的浏览器中，点击顶部的安装按钮或浏览器菜单中的“安装应用”。iPhone / iPad 可在
+            Safari 的分享菜单中选择“添加到主屏幕”。安装后可从桌面独立打开山河纪。
+          </p>
+          <p>
+            首次联网打开并出现“已可离线使用”后，地图、人物与事件目录、世系可离线浏览。人物长篇正文阅读后保存，最多保留
+            400 份、30 天；未读正文、外部来源和部分语音仍需联网。浏览器清理存储后需要重新联网加载。
+          </p>
+          <p>新版本准备好后会提示更新，点击“立即更新”重新打开当前页面。</p>
+        </section>
         <section className="panel about-card">
           <BookOpen />
           <h2>资料范围与来源</h2>

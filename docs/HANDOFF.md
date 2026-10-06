@@ -1,6 +1,6 @@
 # 山河纪 · 开发交接
 
-更新：2026-09-30。最新改动将历史事件目录改为自适应多列卡片，事件从 31 件扩至 101 件，新增类别筛选、年代排序和直接地图定位。主题和阅读字号沿用已确定的有序配色与清晰尺寸。本文是接续入口；来源细节保存在专题文档中。
+更新：2026-10-05。最新改动加入 PWA 安装、离线地图与正文缓存、新版更新提示及 GitHub Pages 自动部署。事件目录仍为 101 件，主题和阅读字号沿用已确定的有序配色与清晰尺寸。本文是接续入口；来源细节保存在专题文档中。
 
 ## 五分钟接续
 
@@ -9,10 +9,11 @@
 3. 本地已有 `node_modules/` 和 Python `.venv/`。运行 `npm run dev` 启动，默认端口 5173；不要假定旧服务仍在运行。
 4. 做疆域工作先读 [BOUNDARY_SOURCES.md](BOUNDARY_SOURCES.md)，查看对应地图配置；不要再次把 CHGIS 当作现成可再发布的历代疆域总库。
 
-本目录已初始化本地 Git，主题改造前的基线提交为 `d465d35`；未配置远程或推送。缓存、依赖和构建产物仍由 `.gitignore` 排除，不能依赖 Git 恢复这些未跟踪文件。技术栈是 React 19 + TypeScript + Vite + D3 Geo + TopoJSON，纯静态，无后端及 API 密钥。路由为 Hash 路由。
+本目录已初始化 Git，主题改造前的基线提交为 `d465d35`；远程为 `git@github.com:keosu/dynasty.git`，默认分支 `main`。Pages 站点为 https://keosu.github.io/dynasty/ ，发布流程见 [DEPLOYMENT.md](DEPLOYMENT.md)。缓存、依赖和构建产物仍由 `.gitignore` 排除，不能依赖 Git 恢复这些未跟踪文件。技术栈是 React 19 + TypeScript + Vite + D3 Geo + TopoJSON，纯静态，无后端及 API 密钥。路由为 Hash 路由。
 
 ## 已实现
 
+- PWA：安装清单、PNG 与 maskable／Apple 图标、浏览器安装入口，应用内保留 iOS 安装说明。生产构建预缓存应用和地图数据，人物长篇正文按阅读缓存（400 份／30 天），断网状态可见；新版本提示后由用户选择更新。开发模式不注册 worker。GitHub Actions 推送 `main` 时验证并部署到 Pages，PR 只验证。
 - 三种主题：青瓷亮色（瓷白／湖蓝）、静夜暗色（深蓝）、琉璃夜色（墨底、青绿、琥珀、珊瑚、淡紫）。顶部调色盘可选择并保存，支持键盘方向键、Escape 和点击外部关闭；地图、世系和百科页面共用。固定视口地图、可折叠和调宽侧栏、移动端布局。
 - 琉璃主题以中性色背景与卡片为主。栏目识别色为地图蓝、人物金、事件珊瑚、世系紫；事件政治／战争／交流／文化／建设分别使用金／珊瑚／蓝／紫／绿，列表补充类别文字和不同图标，同类地图热点使用相同配色，混合类别聚合点为中性色。人物卡片统一，复位标注紫色；时间轴仅突出选中和并立状态。并立地图仍保留来源数据中的政权颜色。
 - 底部双端时间轴、键盘和年份输入、放大本朝；按时间范围筛选在位君主和热点事件。
@@ -54,22 +55,23 @@
 
 ## 按任务找文件
 
-| 任务                             | 首先打开                                                                                       |
-| -------------------------------- | ---------------------------------------------------------------------------------------------- |
-| 全局路由、朝代／区间状态、搜索   | `src/App.tsx`                                                                                  |
-| 主题目录、持久化、启动时应用     | `src/theme.ts`、`src/main.tsx`；选择器在 `src/components/ThemePicker.tsx`                      |
-| 工作区、筛选、面板、场景快捷入口 | `src/pages/AtlasPage.tsx`                                                                      |
-| 地图加载、投影、缩放、路径与点击 | `src/components/HistoryMap.tsx`                                                                |
-| 并立政权图例、当年在位者、讲解   | `src/components/ConflictLegend.tsx`                                                            |
-| 双端时间轴和并立朝代分行         | `src/components/Timeline.tsx`                                                                  |
-| 参考图合并、来源优先级、年份匹配 | `src/domain/boundaries.ts`                                                                     |
-| 球面多边形环方向                 | `src/domain/mapGeometry.ts`                                                                    |
-| 世系、更替、人物详情             | `src/pages/GenealogyPage.tsx`、`src/pages/EncyclopediaPages.tsx`                               |
-| 事件目录、事件内容与资料核对     | `src/pages/EncyclopediaPages.tsx`、`src/data/events-expanded.ts`、`docs/EVENT_SOURCES.md`      |
-| 校订数据                         | `src/data/emperors.ts`、`dynasties.ts`、`events.ts`、`westernRegions.ts`、`succession.ts`      |
-| 导入索引、范围与统计             | `src/data/generated/catalog.json`、`manifest.json`、`monarchs.json`                            |
-| 并立入口索引                     | `src/data/generated/conflict-periods.json`，由地图生成器输出                                   |
-| 布局与样式                       | 依次加载 `src/styles.css`（基础）、`src/app.css`（工作区）、`src/themes.css`（配色和主题外观） |
+| 任务                             | 首先打开                                                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 全局路由、朝代／区间状态、搜索   | `src/App.tsx`                                                                                           |
+| PWA、安装／更新与自动部署        | `docs/DEPLOYMENT.md`、`vite.config.ts`、`src/components/PwaControls.tsx`、`.github/workflows/pages.yml` |
+| 主题目录、持久化、启动时应用     | `src/theme.ts`、`src/main.tsx`；选择器在 `src/components/ThemePicker.tsx`                               |
+| 工作区、筛选、面板、场景快捷入口 | `src/pages/AtlasPage.tsx`                                                                               |
+| 地图加载、投影、缩放、路径与点击 | `src/components/HistoryMap.tsx`                                                                         |
+| 并立政权图例、当年在位者、讲解   | `src/components/ConflictLegend.tsx`                                                                     |
+| 双端时间轴和并立朝代分行         | `src/components/Timeline.tsx`                                                                           |
+| 参考图合并、来源优先级、年份匹配 | `src/domain/boundaries.ts`                                                                              |
+| 球面多边形环方向                 | `src/domain/mapGeometry.ts`                                                                             |
+| 世系、更替、人物详情             | `src/pages/GenealogyPage.tsx`、`src/pages/EncyclopediaPages.tsx`                                        |
+| 事件目录、事件内容与资料核对     | `src/pages/EncyclopediaPages.tsx`、`src/data/events-expanded.ts`、`docs/EVENT_SOURCES.md`               |
+| 校订数据                         | `src/data/emperors.ts`、`dynasties.ts`、`events.ts`、`westernRegions.ts`、`succession.ts`               |
+| 导入索引、范围与统计             | `src/data/generated/catalog.json`、`manifest.json`、`monarchs.json`                                     |
+| 并立入口索引                     | `src/data/generated/conflict-periods.json`，由地图生成器输出                                            |
+| 布局与样式                       | 依次加载 `src/styles.css`（基础）、`src/app.css`（工作区）、`src/themes.css`（配色和主题外观）          |
 
 更多说明：[ARCHITECTURE.md](ARCHITECTURE.md)、[DATA_GUIDE.md](DATA_GUIDE.md)、[DATA_IMPORT.md](DATA_IMPORT.md)。
 
@@ -106,6 +108,7 @@ npm run dev
 npm test
 npm run build
 npm run test:e2e
+npm run test:pwa
 # 首次缺 Chromium 时：npx playwright install chromium
 
 # 仅在更改地图配置、需要复现时运行：
@@ -124,3 +127,5 @@ npm run test:e2e
 同日阅读尺寸更新验证：构建和 20 项单元测试通过；浏览器用例分两组执行，7 项工作区测试和其余 7 项均通过。扩展现有用例校验桌面／手机世系默认节点显示宽度、查看全图及重置，截图确认更大的列表文字和节点。节点边框计入屏幕边界，尺寸断言保留 2px 容差。
 
 同日事件扩充与目录更新验证：最终构建和 21 项单元测试通过；16 项 Playwright 用例全部通过（新增 2 项事件目录用例），覆盖桌面多列占宽、手机单列与筛选控件宽度、字号、类别与年代排序、关键词／时间组合筛选、空状态、详情来源／人物关联及直接地图定位。已检查桌面亮色、琉璃暗色和手机事件截图，修正了手机搜索框挤压朝代选择器的问题。截图在忽略提交的 `test-results/events-*.png`。没有重新抓取全部人物或生成疆域。
+
+2026-10-05 PWA 与部署更新验证：21 项单元测试、16 项原有 Playwright 用例、4 项新增生产 PWA 用例全部通过，`npm run build:pages` 通过。预缓存 22 个资源约 3.58 MiB，不包含 392 份人物正文。PWA 用例验证 `/dynasty/` 下的清单／PNG 图标／worker 作用域、未提前浏览的地图离线可用、已读与未读正文处理、手机安装入口，以及真实新 worker 等待确认、更新刷新和主题／Hash 保留。手机关于页截图已检查；`npm audit` 无已知漏洞。未重新抓取人物或生成地图。本次在独立 Git worktree 完成，原工作目录已有的地图／事件未提交改动保持原样，不属于本次发布。CI 与部署结果见 [GitHub Actions](https://github.com/keosu/dynasty/actions/workflows/pages.yml)。

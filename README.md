@@ -21,9 +21,24 @@ npm run preview     # 本地预览生产构建
 npm test            # 数据引用、纪年、复位与疆域投影验证
 npx playwright install chromium  # 首次浏览器验证需要
 npm run test:e2e    # 浏览器交互与移动端布局验证
+npm run test:pwa    # 生产构建的 Pages 子路径、离线、安装入口与更新验证
 ```
 
 可把 `dist/` 部署到任意静态托管。页面使用 Hash 路由，详情页直接打开或刷新不需要服务器重写规则。如果部署到子目录，请使用 `npx vite build --base=/子目录/`。
+
+## PWA 与 GitHub Pages
+
+站点地址：[山河纪](https://keosu.github.io/dynasty/)。推送到 `main` 后，GitHub Actions 自动执行测试、构建并部署到 Pages；PR 只运行验证。配置与排查方法见 [部署说明](docs/DEPLOYMENT.md)。
+
+支持安装的浏览器会显示顶部安装按钮，也可使用浏览器菜单安装。iPhone / iPad 使用 Safari 的分享菜单 → 添加到主屏幕。首次联网打开并提示“已可离线使用”后，应用、地图、目录和世系可离线重开；人物长篇正文阅读后缓存，最多 400 份、30 天，未读正文和外部来源仍需联网。新版本准备好后提示“立即更新”，由用户选择刷新时机。
+
+```sh
+npm run build:pages # 构建 /dynasty/ 子路径版本
+npm run preview -- --base=/dynasty/
+npm run icons       # 修改 favicon.svg 后重新生成安装图标
+```
+
+PWA 需要 HTTPS 或 localhost；开发服务器不注册 Service Worker。生产预览请打开终端地址下的 `/dynasty/`。浏览器清理网站存储后需要重新联网加载，系统语音的离线可用性取决于设备。
 
 ## 当前功能
 
